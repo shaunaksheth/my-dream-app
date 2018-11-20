@@ -9,14 +9,17 @@ import { EmpPipe } from './pipes/emp.pipe';
 import { EmployeeInfoComponent } from './employee-info/employee-info.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { Routes, RouterModule } from '@angular/router';
+import { MyAppRoutingModule } from './my-app-routing/my-app-routing.module';
+import { EmpdataService } from './services/empdata.service';
+import { EmplistserviceComponent } from './emplistservice/emplistservice.component';
 
-const appRoutes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'employeeslist', component: EmployeeInfoComponent},
-  {path: 'employees', component: EmployeeComponent},
-  {path: '', redirectTo:'/home', pathMatch: 'full'},
-  {path:'**', component: PageNotFoundComponent}
-];
+// const appRoutes: Routes = [
+//   {path: 'home', component: HomeComponent},
+//   {path: 'employeeslist', component: EmployeeInfoComponent},
+//   {path: 'employees', component: EmployeeComponent},
+//   {path: '', redirectTo:'/home', pathMatch: 'full'},
+//   {path:'**', component: PageNotFoundComponent}
+// ];
 
 
 @NgModule({
@@ -27,14 +30,16 @@ const appRoutes: Routes = [
     ContactusComponent,
     EmpPipe,
     EmployeeInfoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EmplistserviceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    //RouterModule.forRoot(appRoutes)
+    MyAppRoutingModule
   ],
-  providers: [],
+  providers: [EmpdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

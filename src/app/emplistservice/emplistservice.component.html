@@ -1,0 +1,34 @@
+<style>
+  .jumbotron {
+      background-color: bisque;
+      color: blue;
+  }
+  </style>
+<body>
+    <div class="jumbotron text-center">
+<h1 align="center">
+  EmployeeList Service works!
+</h1>
+<br>
+<table class="panel panel-primary">
+  <thead class="panel-heading">
+    <tr>
+      <td>Code</td>
+      <td>Name</td>
+      <td>Gender</td>
+      <td>Annual Salary</td>
+      <td>DOB</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="panel-title" *ngFor='let emp of employees1'>
+      <td>{{emp.code}}</td>
+      <td>{{emp.name}}</td>
+      <td>{{emp.gender | emp}}</td>
+      <td>{{emp.annualSalary}}</td>
+      <td>{{emp.dateOfBirth}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>

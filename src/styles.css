@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+table{
+    border: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-decoration: solid blue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+td{
+    border: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+thead{
+font-weight: bold;
+}
+tr{
+    font-style: italic;
+    background-color: lightgray;
+}
