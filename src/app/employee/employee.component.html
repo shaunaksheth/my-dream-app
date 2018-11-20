@@ -1,0 +1,65 @@
+<h1>
+  {{name}}
+</h1>
+
+<body>
+  <table>
+    <tr>
+      <td>First Name</td>
+      <td>{{FirstName}}</td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td>{{LastName}}</td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>{{Gender}}</td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td>{{Age}}</td>
+    </tr>
+  </table>
+  <h1>Full Name = {{display_name()}}</h1>
+  <span *ngIf="ShowFaculty">Faculty: {{Faculty}}</span>
+  <p>Subjects: <span *ngFor="let s of Subjects; let i=index"><span *ngIf="i!=0">,</span>{{s}}</span></p>
+
+  <table>
+    <thead>
+      <tr>
+        <td>code</td>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>Annual Salary</td>
+        <td>DOB</td>
+        <td>Employee Type</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let emp of employees'>
+        <td>{{emp.code}}</td>
+        <td>{{emp.name}}</td>
+        <td>{{emp.gender | emp}}</td>
+        <td>{{emp.annualSalary}}</td>
+        <td>{{emp.dateOfBirth}}</td>
+        <td> <span [ngSwitch]="emp.emptype"> 
+          <span *ngSwitchCase="0">Daily</span> 
+          <span *ngSwitchCase="1">Permanent</span>
+          <span *ngSwitchCase="2">Contract</span>
+          <span *ngSwitchCase="3">Retired</span>
+          <span *ngSwitchDefault>Other</span> </span>         
+      </tr>
+      <tr *ngIf="!employees || employees.length==0">
+        <td colspan="5">No Employees to Display</td>
+      </tr>
+    </tbody>
+  </table>
+<br>
+
+  <table>
+    <tr><td colspan="3"><h3>Display from Class</h3></td></tr>
+    <tr><td>Code: {{emp.id}}</td><td>Name: {{emp.name |uppercase}}</td><td>Salary: {{emp.salary}}</td></tr>
+  </table>
+  <h2>{{emp | json}}</h2>
+</body>
