@@ -6,12 +6,16 @@ import { EmployeeInfoComponent } from '../employee-info/employee-info.component'
 import { EmployeeComponent } from '../employee/employee.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { EmplistserviceComponent } from '../emplistservice/emplistservice.component';
+import { CreatemployeeComponent } from '../createmployee/createmployee.component';
+import { HttpservicecallComponent } from '../httpservicecall/httpservicecall.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'employeeslist', component: EmployeeInfoComponent},
   {path: 'employees', component: EmployeeComponent},
   {path: 'employeeservice', component: EmplistserviceComponent},
+  {path: 'createemployee', component: CreatemployeeComponent},
+  {path: 'items', component: HttpservicecallComponent},
   {path: '', redirectTo:'/home', pathMatch: 'full'},
   {path:'**', component: PageNotFoundComponent}
 ];

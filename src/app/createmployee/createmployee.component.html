@@ -1,0 +1,43 @@
+<body>
+  <h2 align="center" class="panel-heading">
+    Create Employee
+  </h2>
+  <div class="container">
+    <div class="jumbotron">
+      <form #frm="ngForm" (ngSubmit)="UserFunction(frm)">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" class="cols-sm-2 control-label form-control" pattern="[a-zA-Z][a-zA-Z ]+"
+            #NameControl="ngModel" [(ngModel)]="varbind" required>
+          <div *ngIf="NameControl?.touched && NameControl?.invalid" class="alert alert-danger">
+            <div *ngIf="NameControl?.errors?.required">Name is Mandatory Field</div>
+            <div *ngIf="NameControl.errors?.pattern">Pls. Enter Valid Name</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contact">Contact:</label>
+          <input type="text" name="contact" maxlength="10" class="form-control" pattern="[0-9]{10}" #ContactControl="ngModel" ngModel required>
+          <div *ngIf="ContactControl?.touched && ContactControl?.invalid" class="alert alert-danger">
+            <div *ngIf="ContactControl?.errors?.required">Contact Number is a Mandatory Field</div>
+            <div *ngIf="ContactControl.errors?.pattern">Pls. Enter Valid Mobile Number</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="cols-sm-2 control-label">Email:</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+              <input type="text" #emailn="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #emailControl="ngModel" name="email" class="form-control" ngModel required>
+              <div *ngIf="emailControl?.touched && emailControl?.invalid" class="alert alert-danger">
+                <div *ngIf="emailControl?.errors?.required">Email is a Mandatory Field</div>
+                <div *ngIf="emailControl.errors?.pattern">Pls. Enter a Valid Email Address</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" name="button" class="btn btn-primary btn-lg btn-block login-button" [disabled]="frm.invalid">Add
+          User</button>
+      </form>
+    </div>
+  </div>
+</body>
