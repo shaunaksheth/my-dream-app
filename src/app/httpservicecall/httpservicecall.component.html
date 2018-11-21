@@ -34,21 +34,30 @@
     Shopping List
   </h3>
   <br>
+  <form>
   <table class="panel panel-primary">
     <thead class="panel-heading">
       <tr>
+        <td>Select</td>
+        <td>ID</td>
         <td>Item</td>
         <td>Quantity</td>
+        <td>Edit</td>
+        <td>Delete</td>
       </tr>
     </thead>
     <tbody>
       <tr class="panel-title" *ngFor="let it of items;">
+        <td><input type="checkbox" name="itemchk" name="" [checked]="it.id" (click)='updateItemcheckbox(item)'></td>
         <td>{{it.id}}</td>
         <td>{{it.itemname}}</td>
         <td>{{it.itemquantity}}</td>
+        <td><button type="button" name="edititem" class="btn btn-primary" (click)='showEditform(item)' [disabled]='toggleForm'>Edit Item</button></td>
+        <td><button type="button" name="deleteitem" class="btn btn-primary" (click)='deleteItem(item._id)'>Delete Item</button></td>
       </tr>
     </tbody>
   </table>
+</form>
   </div>
   
   
