@@ -4,7 +4,7 @@
   </h2>
   <div class="container">
     <div class="jumbotron">
-      <form #frm="ngForm" (ngSubmit)="addItems(frm)">
+      <form #frm="ngForm" (ngSubmit)="addItems(frm)" *ngIf="!toggleForm">
         <div class="form-group">
           <label for="name">Item Name:</label>
           <input type="text" name="itemname" class="cols-sm-2 control-label form-control" pattern="[a-zA-Z][a-zA-Z ]+"
@@ -16,7 +16,8 @@
         </div>
         <div class="form-group">
           <label for="quantity">Quantity:</label>
-          <input type="text" name="itemquantity" maxlength="3" class="form-control" pattern="[0-9]*" #QuantityControl="ngModel" ngModel required>
+          <input type="text" name="itemquantity" maxlength="3" class="form-control" pattern="[0-9]*" #QuantityControl="ngModel"
+            ngModel required>
           <div *ngIf="QuantityControl?.touched && QuantityControl?.invalid" class="alert alert-danger">
             <div *ngIf="QuantityControl?.errors?.required">Quantity is a Mandatory Field</div>
             <div *ngIf="QuantityControl.errors?.pattern">Pls. Enter Valid Quantity Number</div>
@@ -24,6 +25,24 @@
         </div>
         <button type="submit" name="button" class="btn btn-primary btn-lg btn-block login-button" [disabled]="frm.invalid">Add
           Item</button>
+      </form>
+      <form #editfrm="ngForm" (ngSubmit)="editForm(editfrm)" *ngIf="toggleForm">
+        <h2>Edit Item</h2>
+        <div class="form-group">
+          <label for="">
+            Name:
+          </label>
+         <input type="text" class="form-control" name="itemname" value="" [ngModel]="selectedItem.itemname">
+        </div>
+
+        <div class="form-group">
+          <label for="">
+            Quantity:
+          </label>
+
+          <input type="number" class="form-control" name="itemquantity" value="" [ngModel]="selectedItem.itemquantity">
+        </div>
+        <button type="submit" name="button" class="btn btn-success">Save</button>
       </form>
     </div>
   </div>
@@ -35,29 +54,28 @@
   </h3>
   <br>
   <form>
-  <table class="panel panel-primary">
-    <thead class="panel-heading">
-      <tr>
-        <td>Select</td>
-        <td>ID</td>
-        <td>Item</td>
-        <td>Quantity</td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="panel-title" *ngFor="let it of items;">
-        <td><input type="checkbox" name="itemchk" name="" [checked]="it.id" (click)='updateItemcheckbox(item)'></td>
-        <td>{{it.id}}</td>
-        <td>{{it.itemname}}</td>
-        <td>{{it.itemquantity}}</td>
-        <td><button type="button" name="edititem" class="btn btn-primary" (click)='showEditform(item)' [disabled]='toggleForm'>Edit Item</button></td>
-        <td><button type="button" name="deleteitem" class="btn btn-primary" (click)='deleteItem(item._id)'>Delete Item</button></td>
-      </tr>
-    </tbody>
-  </table>
-</form>
-  </div>
-  
-  
+    <table class="panel panel-primary">
+      <thead class="panel-heading">
+        <tr>
+          <td>Select</td>
+          <td>ID</td>
+          <td>Item</td>
+          <td>Quantity</td>
+          <td>Edit</td>
+          <td>Delete</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="panel-title" *ngFor="let it of items;">
+          <td><input type="checkbox" name="itemchk" name="" [checked]="it.id" (click)='updateItemcheckbox(it)'></td>
+          <td>{{it.id}}</td>
+          <td>{{it.itemname}}</td>
+          <td>{{it.itemquantity}}</td>
+          <td><button type="button" name="edititem" class="btn btn-primary" (click)='showEditform(it)' [disabled]='toggleForm'>Edit
+              Item</button></td>
+          <td><button type="button" name="deleteitem" class="btn btn-primary" (click)='deleteItem(it.id)'>Delete Item</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

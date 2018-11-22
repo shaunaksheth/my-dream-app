@@ -10,6 +10,8 @@ import { NgForm } from '@angular/forms';
 })
 export class HttpservicecallComponent implements OnInit {
   items: Items[];
+  toggleForm: Boolean = false;
+  selectedItem: Items;
   constructor(private _shoppingItems: DataService) { }
 
   ngOnInit() {
@@ -29,24 +31,58 @@ export class HttpservicecallComponent implements OnInit {
     }
     this._shoppingItems.addshoppingitems(newitem).subscribe(items => { this.getItems(); })
   }
-  
-  editItems(frm: NgForm): void {
-    console.log(frm.value)
-    let newitem: Items = {
-      id:this.items._id,
-      itemname: frm.value.itemname,
-      itemquantity: frm.value.itemquantity
+
+
+  editForm(editfrm) {
+    let newItem: Items = {
+      id: this.selectedItem.id,
+      itemname: editfrm.value.itemname,
+      itemquantity: editfrm.value.itemquantity,
+      //itemboughts: this.selectedItem.itemboughts
+
     }
-    this._shoppingItems.addshoppingitems(newitem).subscribe(items => { this.getItems(); })
+    console.log("New Itam Object Value"+newItem);
+    this._shoppingItems.updateshoppingitems(newItem)
+      .subscribe(result => {
+        console.log('original item to be updated with old values' + result);
+        this.getItems();
+        this.toggleForm = !this.toggleForm;
+      })
+
   }
-  
-  deleteItems(frm: NgForm): void {
-    console.log(frm.value)
-    let newitem: Items = {
-      itemname: frm.value.itemname,
-      itemquantity: frm.value.itemquantity
+  showEditform(Item) {
+    this.selectedItem = Item;
+
+    this.toggleForm = !this.toggleForm;
+
+  }
+
+
+  //updateItemcheckbox(item) {
+    //item.itemboughts = !item.itemboughts;
+    //this._shoppingItems.updateshoppingitems(item)
+   //   .subscribe(result => {
+       // console.log('Original CheckBox values' + result.itemboughts);
+        // item.getItems();
+    //  })
+  //}
+
+
+
+
+  deleteItem(id): void {
+    // let newitem: Items = {
+    //   id:id
+    // }
+    this._shoppingItems.deleteshoppingitems(id).subscribe(items => {
+      console.log(items);
+
+      for (var i = 0; i < this.items.length; i++) {
+        if (id == this.items[i].id) {
+          this.items.splice(i, 1);
+        }
+      }
     }
-    this._shoppingItems.addshoppingitems(newitem).subscribe(items => { this.getItems(); })
+    )
   }
-  
 }

@@ -9,7 +9,7 @@ export class DataService {
   constructor(private http:HttpClient) { }
   getshoppingitems()
   {
-    console.log(this.http.get('http://localhost:3000/items'));
+    //console.log(this.http.get('http://localhost:3000/items'));
     return this.http.get('http://localhost:3000/items');
     
     }
@@ -23,7 +23,13 @@ export class DataService {
     updateshoppingitems(additem)
     {
       //console.log(this.http.get('http://localhost:3000/items'));
-      return this.http.put('http://localhost:3000/items',additem);
+      return this.http.put('http://localhost:3000/items/'+additem.id,additem);
+      
+      }
+      deleteshoppingitems(id)
+    {
+      //console.log(this.http.get('http://localhost:3000/items'));
+      return this.http.delete('http://localhost:3000/items/'+id);
       
       }
   }
